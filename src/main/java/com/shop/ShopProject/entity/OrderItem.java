@@ -26,5 +26,5 @@ public class OrderItem extends BaseEntity{
     private int orderPrice;
 
     private int count;
-    
+
 }
