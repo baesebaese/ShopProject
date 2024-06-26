@@ -1,6 +1,7 @@
 package com.shop.ShopProject.entity;
 
 import com.shop.ShopProject.constant.ItemSellStatus;
+import com.shop.ShopProject.dto.ItemFormDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +10,11 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="Item")
+@Table(name="item")
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity{
     @Id
     @Column(name="item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +24,7 @@ public class Item {
     private String itemNm; // 상품명
 
     @Column(name="price", nullable = false)
-    private int price; // rkrur
+    private int price; // 가격
 
 
     @Column(nullable = false)
@@ -39,4 +40,12 @@ public class Item {
     private LocalDateTime regTime; // 등록 시간
     
     private LocalDateTime updateTime; // 수정 시간
+
+    public void updateItem(ItemFormDto itemFormDto) {
+        this.itemNm = itemFormDto.getItemNm();
+        this.price = itemFormDto.getPrice();
+        this.stockNumber = itemFormDto.getStockNumber();
+        this.itemDetail = itemFormDto.getItemDetail();
+        this.itemSellStatus = itemFormDto.getItemSellStatus();
+    }
 }
